@@ -19,6 +19,11 @@
 </template>
 
 <script>
+let params = new URLSearchParams();
+params.append('temp', '1');
+params.append('humi', '1');
+params.append('press', '1');
+
 export default {
   name: "ReceiveIp",
   methods: {
@@ -26,7 +31,9 @@ export default {
       this.axios
 //        .post("http://www.tic-keisokuki.com:5000/pure_flow_data_send")
 //        .post("http://www.tic-keisokuki.com:5000/thermograph_data_send")
-        .post("http://www.tic-keisokuki.com:5000/thp_data_send")
+        .post("http://www.tic-keisokuki.com:5000/thp_data_send",
+          params
+        )
         .then(response => {
           alert(JSON.stringify(response.data));
           console.log(response.data)
@@ -37,11 +44,17 @@ export default {
     },
     sendIp() {
       this.axios
-        .post("http://www.tic-keisokuki.com:5000/thp_data",{
-          temp: "10",
-          humi: "20",
-          pres: "1010"
-        })
+        .post("http://www.tic-keisokuki.com:5000/thp_data",params)
+//          temp: "10",
+//          humi: "20",
+//          pres: "1010"
+//        },
+//        headers: {
+//            'Content-Type': 'application/json;charset=UTF-8',
+//            'Access-Control-Allow-Origin': '*',
+//            'Content-Type': 'application/x-www-form-urlencoded'
+//          }
+//        })
         .then(response => {
           alert(JSON.stringify(response.data));
           console.log(response.data)
